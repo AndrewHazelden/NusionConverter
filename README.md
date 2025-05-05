@@ -8,6 +8,8 @@
 ```
 Nusion is a Web app to convert nodes between Foundry's Nuke and Blackmagic Design's Fusion Studio compositing software.
 
+## Screenshot
+
 ![Webapp](docs/images/screenshot.png)
 
 ## Supported Notes
