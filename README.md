@@ -134,4 +134,26 @@ The Fusion formatted node data can be accessed using the "result" JSON key.
 {"result":"{\nTools = ordered() {\ncar_Dust_Blur = Blur {\nInputs = {\nXBlurSize = Input { Value = 1.43561, },\n},\nViewInfo = OperatorInfo {\nPos = { 950, 1330 },\n},\n}\n}\n}"}
 ```
 
+## BMD Fusion Studio Usage
+
+If you have Blackmagic Fusion Studio installed, there is a beta version of a "Paste Nusion" Reactor atom package available. The "Paste Nusion" menu entry and Lua comp script converts a Foundry Nuke .nk node snippet into a BMD Fusion Studio node.
+
+![Paste Nusion](docs/images/paste_nusion.png)
+
+### Paste Nusion Usage: 
+
+1. Install NusionConvert. Start Nussion in a terminal window.
+2. Copy your Nuke node snippet into your clipboard buffer.
+3. Open Fusion Studio. Run the "Edit > Paste Nusion" menu item to automatically convert the nodes, and add them to your currently open Fusion comp.
+
+### Paste Nusion Installation:
+
+The "Paste Nusion" script is accesible in the NusionConverter GitHub repo under the folder:
+
+- Atoms/com.AndrewHazelden.PasteNusion/
+
+To manually install the PasteNusion atom package files:
+1. Install NusionConvert from the GitHub repo.
+2. Copy the "Config" folder contents into your "Reactor:/Deploy/Config/" folder.
+3. Copy the "Scripts/Comp" folder contents into your "Reactor:/Deploy/Scripts/Comp/" folder.
 

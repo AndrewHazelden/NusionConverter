@@ -1,0 +1,22 @@
+Atom {
+	Name = "Paste Nusion",
+	Category = "Scripts/Comp",
+	Author = "Andrew Hazelden",
+	Version = 1,
+	Date = {2025, 5, 5},
+	Description = [[<h2>Nusion</h2>
+
+<p>The "Edit &gt; Paste Nusion" menu item lets you paste a Foundry Nuke node from your clipboard and have it instantly translated into the corresponding Fusion Studio node.</p>
+
+<p>This Paste Nusion comp script/menu item uses the NodeJS/Python based "Nusion" flask appication that is able to run locally on your system, or on a server that is accessible to workstations on your local LAN. Check out the NusionConverter GitHub repo for more details on the local webapp installation process.</p>
+
+<h2>For More Info</h2>
+
+<ul>
+	<li><a href="https://github.com/AndrewHazelden/NusionConverter">NusionConverter GitHub repo</a></li>
+</ul>]],
+	Deploy = {
+		"Config/Nusion/Nusion.fu",
+		"Scripts/Comp/Nusion/Paste Nusion.lua",
+	},
+}

@@ -1,0 +1,11 @@
+{
+	Menus
+	{
+		Target = "ChildFrame",
+
+		After "Edit\\Paste Settings"
+		{
+			"RunScript{Name = 'Paste Nusion', filename = 'Scripts:/Comp/Nusion/Paste Nusion.lua'}",
+		},
+	},
+}
