@@ -79,7 +79,13 @@ Install the Homebrew package manager:
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+echo >> /Users/vfx/.zprofile
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/vfx/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
+![Nusion CLI](docs/images/1_brew.png)
+
+![Nusion CLI](docs/images/2_brew.png)
 
 Create a new Python virtual environment:
 
@@ -88,6 +94,8 @@ cd $HOME/
 python3 -m venv nusion
 source $HOME/nusion/bin/activate
 ```
+
+![Nusion CLI](docs/images/3_venv.png)
 
 Clone the repo and install the dependencies using Homebrew and Python pip package managers:
 
@@ -101,6 +109,16 @@ cd $HOME/NusionConverter/
 pip3 install -r requirements.txt
 ```
 
+![Nusion CLI](docs/images/4_brew_npm.png)
+
+![Nusion CLI](docs/images/5_pip_upgrade.png)
+
+![Nusion CLI](docs/images/6_pip_flask.png)
+
+![Nusion CLI](docs/images/7_git_clone.png)
+
+![Nusion CLI](docs/images/8_pip_require.png)
+
 Activate the Python virtual environment and start the Flask app:
 
 ```bash
@@ -109,11 +127,14 @@ cd $HOME/NusionConverter/app
 flask run
 ```
 
+![Nusion CLI](docs/images/9_flask.png)
+
 Open a webbrowser session to view the web app:
 
 ```bash
 open http://127.0.0.1:5000/
 ```
+![Nusion CLI](docs/images/10_webbrowser.png)
 
 ## cURL Usage
 
@@ -125,7 +146,6 @@ The Nuke node data is stored in a "data" JSON key that is submitted by cURL via 
 curl 'http://127.0.0.1:5000/convert' -X POST -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate, br, zstd' -H 'Referer: http://127.0.0.1:5000/' -H 'Content-Type: application/json' -H 'Origin: http://127.0.0.1:5000' -H 'Connection: keep-alive' --data-raw '{"data":"Blur {\n inputs 1+1\n size 4\n name car_Dust_Blur\n xpos 950\n ypos 1330\n}","width":"1920","height":"1080","fromSoftware":"nuke"}'
 ```
 
-
 cURL Terminal Result:
 
 The Fusion formatted node data can be accessed using the "result" JSON key.
@@ -134,9 +154,13 @@ The Fusion formatted node data can be accessed using the "result" JSON key.
 {"result":"{\nTools = ordered() {\ncar_Dust_Blur = Blur {\nInputs = {\nXBlurSize = Input { Value = 1.43561, },\n},\nViewInfo = OperatorInfo {\nPos = { 950, 1330 },\n},\n}\n}\n}"}
 ```
 
+![Nusion CLI](docs/images/11_curl_cli.png)
+
 ## BMD Fusion Studio Usage
 
-If you have Blackmagic Fusion Studio installed, there is a beta version of a "Paste Nusion" Reactor atom package available. The "Paste Nusion" menu entry and Lua comp script converts a Foundry Nuke .nk node snippet into a BMD Fusion Studio node.
+If you have Blackmagic Fusion Studio, the "Paste Nusion" menu entry and Lua comp script allows you to convert a Foundry Nuke .nk node snippet into a BMD Fusion Studio native node.
+
+There is a beta version of a "Paste Nusion" Reactor atom package available from the NusionConvert GitHub repository.
 
 ![Paste Nusion](docs/images/paste_nusion.png)
 
@@ -151,6 +175,8 @@ If you have Blackmagic Fusion Studio installed, there is a beta version of a "Pa
 The "Paste Nusion" script is accesible in the NusionConverter GitHub repo under the folder:
 
 - Atoms/com.AndrewHazelden.PasteNusion/
+
+![Paste Nusion Atom](docs/images/repo_atom.png)
 
 To manually install the PasteNusion atom package files:
 1. Install NusionConvert from the GitHub repo.
