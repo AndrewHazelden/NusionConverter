@@ -79,8 +79,8 @@ Install the Homebrew package manager:
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-echo >> /Users/vfx/.zprofile
-echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/vfx/.zprofile
+echo >> $HOME/.zprofile
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> HOME/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
 ![Nusion CLI](docs/images/1_brew.png)
