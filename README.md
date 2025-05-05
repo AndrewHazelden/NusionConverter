@@ -64,7 +64,8 @@ npm install
 Start the Flask development server.
 
 ```bash
-python app/app.py
+cd NusionConverter/app
+flask run
 ```
 
 ### macOS Install:
@@ -92,8 +93,8 @@ brew install npm
 pip3 install --upgrade pip
 pip3 install flask
 cd $HOME/
-git clone https://github.com/AndrewHazelden/NukeToFusion.git
-cd $HOME/NukeToFusion/
+git clone https://github.com/AndrewHazelden/NusionConverter.git
+cd $HOME/NusionConverter/
 pip3 install -r requirements.txt
 ```
 
@@ -101,7 +102,7 @@ Activate the Python virtual environment and start the Flask app:
 
 ```bash
 source $HOME/nusion/bin/activate
-cd $HOME/NukeToFusion/app
+cd $HOME/NusionConverter/app
 flask run
 ```
 
