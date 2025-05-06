@@ -62,7 +62,7 @@ Let's use the Winget package manager to install NodeJS / NPM in the Command Prom
 winget install OpenJS.NodeJS
 ```
 
-Python 3.11 can be installed using Winget in the Command Prompt window:
+Python 3.13 can be installed using Winget in the Command Prompt window:
 
 ```bash
 winget install python.python.3.13
