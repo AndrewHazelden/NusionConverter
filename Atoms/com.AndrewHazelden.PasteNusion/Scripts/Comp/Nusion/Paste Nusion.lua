@@ -1,5 +1,5 @@
 --[[--
-Paste Nusion.lua - 2025-05-06 07.18 AM
+Paste Nusion.lua - 2025-05-06 9.08 AM
 Ported by Andrew Hazelden <andrew@andrewhazelden.com>
 
 The "Edit > Paste Nusion" menu item lets you paste a Foundry Nuke node from your clipboard and have it instantly translated into the corresponding Fusion Studio node.
@@ -64,14 +64,17 @@ function GetJSONKey(json_str, key)
     local value = nil
     local found = false
 
-    for k, v in pairs(json_tbl) do
-        if k == key then
-            value = v
-            found = true
-            break
+    if type(json_tbl) == "table" then
+        for k, v in pairs(json_tbl) do
+            if k == key then
+                value = v
+                found = true
+                break
+            end
         end
-    end
-
+    else
+        print(string.format("The json data is invalid. No table present."))
+    end 
     if not found then
         print(string.format("no key '%s' found in json table", key))
     end
@@ -79,6 +82,28 @@ function GetJSONKey(json_str, key)
     return value
 end
 
+function JSONToFile(node_str, width, height)
+    local dir = comp:MapPath('Temp:\\Nusion\\')
+    bmd.createdir(dir)
+    local path = dir .. 'Nodes.json'
+
+    local noNewlines_str = string.gsub(node_str or "", "\n", "\\n")
+    local NoCRs_str = string.gsub(noNewlines_str, "\r", "\\r")
+    -- print(noNewlines)
+
+    local outJson_str = [[{"data":"]] .. NoCRs_str .. [[" ,"width":"]] .. width .. [[","height":"]] .. height .. [[","fromSoftware":"nuke"}]]
+
+    local fp = io.open(path, "w")
+    if fp == nil then
+        error(string.format("file could not be created: %s", path))
+    else
+        fp:write(outJson_str)
+        fp:write("\n")
+        fp:close()
+    end
+    
+    return path
+end
 
 function CopyFromClipboard()
     local out = ""
@@ -140,8 +165,8 @@ function Main()
 --
 --]=]
 
-    local nukeScriptNoNewlines_str = string.gsub(nukeScript_str, "\n", "\\n")
-    -- print(nukeScriptNoNewlines_str)
+    -- Write the JSON file to disk
+    local jsonFile = JSONToFile(nukeScript_str, width, height)
 
     local platform = GetPlatform()
     local curlFile = ""
@@ -158,13 +183,21 @@ function Main()
         error("[Curl Filepath] There is an invalid Fusion platform detected")
     end
 
-    local launchCommand = [["]] .. tostring(curlFile) .. [[" "]] .. nusionServerIP .. [[/convert" -X POST -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate, br, zstd' -H 'Referer: ]] .. nusionServerIP .. [[/' -H 'Content-Type: application/json' -H 'Origin: ]] .. nusionServerIP .. [[' -H 'Connection: keep-alive' --data-raw '{"data":"]] .. nukeScriptNoNewlines_str .. [[" ,"width":"]] .. 1920 .. [[","height":"]] .. 1080 .. [[","fromSoftware":"nuke"}''']]
+    local launchCommand = ""
+    if platform == "Windows" then
+        launchCommand = [["]] .. tostring(curlFile) .. [[" "]] .. nusionServerIP .. [[/convert" -X POST -H "Accept: */*" -H "Accept-Encoding: gzip, deflate, br, zstd" -H "Referer: ]] .. nusionServerIP .. [[/" -H "Content-Type: application/json" -H "Origin: ]] .. nusionServerIP .. [[" -H "Connection: keep-alive" --data-ascii "@]] .. jsonFile .. [["]]
+    else
+        launchCommand = [["]] .. tostring(curlFile) .. [[" "]] .. nusionServerIP .. [[/convert" -X POST -H "Accept: */*" -H "Accept-Encoding: gzip, deflate, br, zstd" -H "Referer: ]] .. nusionServerIP .. [[/" -H "Content-Type: application/json" -H "Origin: ]] .. nusionServerIP .. [[" -H "Connection: keep-alive" --data-ascii "@]] .. jsonFile .. [["]]
+    end
 
     local json_str = System(launchCommand)
     local fusionComp_str = GetJSONKey(json_str, "result") or ""
 
     if show_dump == 1 then
         print("\n----------------------")
+        print("\n[Nuke Script]")
+        print(nukeScript_str)
+  
         print("\n[CLI Parameters]")
         print(launchCommand)
 
