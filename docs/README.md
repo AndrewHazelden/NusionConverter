@@ -43,6 +43,8 @@ To test the Nusion Web app, you can copy/paste the following Nuke blur node snip
 
 ## License
 
+The Nusion Web app was created by Jonty Pressinger. The Nusion integration for Fusion Studio was created by Andrew Hazelden.
+
 - [MIT](https://choosealicense.com/licenses/mit/) Open-Source License
 
 -------------------------

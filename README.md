@@ -43,6 +43,8 @@ To test the nusion web app, you can copy/paste the following Nuke blur node snip
 
 ## License
 
+Nusion was originally created by Jonty Pressinger. The Nusion Converter for Fusion port was created by Andrew Hazelden.
+
 - [MIT](https://choosealicense.com/licenses/mit/) Open-Source License
 
 ## For More Info
