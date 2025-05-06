@@ -1,5 +1,5 @@
 --[[--
-Paste Nusion.lua - 2025-05-06 9.08 AM
+Paste Nusion.lua - 2025-05-06 9.51 AM
 Ported by Andrew Hazelden <andrew@andrewhazelden.com>
 
 The "Edit > Paste Nusion" menu item lets you paste a Foundry Nuke node from your clipboard and have it instantly translated into the corresponding Fusion Studio node.
@@ -23,12 +23,19 @@ Blur {
 --]]--
 
 function System(commandString)
-    local handler = io.popen(commandString);
-    local response = tostring(handler:read('*a'))
-    handler:close()
+    local platform = GetPlatform()
+    if platform == "Windows" then
+        os.execute([[start "" ]] .. commandString)
+        bmd.wait(2)
+        return ""
+    else
+        local handler = io.popen(commandString);
+        local response = tostring(handler:read('*a'))
+        handler:close()
 
-    -- Trim off the last character which is a newline
-    return response:sub(1,-2)
+        -- Trim off the last character which is a newline
+        return response:sub(1,-2)
+    end
 end
 
 -- Find out the current directory from a file path
@@ -82,18 +89,28 @@ function GetJSONKey(json_str, key)
     return value
 end
 
+function curlOutputFilename()
+    local dir = comp:MapPath('Temp:/Nusion/')
+    bmd.createdir(dir)
+    local path = dir .. 'cURL_Output.json'
+    local pathNormalizeSlashes_str = string.gsub(path, "\\", "/")
+    
+    return pathNormalizeSlashes_str
+end
+
 function JSONToFile(node_str, width, height)
-    local dir = comp:MapPath('Temp:\\Nusion\\')
+    local dir = comp:MapPath('Temp:/Nusion/')
     bmd.createdir(dir)
     local path = dir .. 'Nodes.json'
+    local pathNormalizeSlashes_str = string.gsub(path, "\\", "/")
 
     local noNewlines_str = string.gsub(node_str or "", "\n", "\\n")
     local NoCRs_str = string.gsub(noNewlines_str, "\r", "\\r")
-    -- print(noNewlines)
+    -- print(NoCRs_str)
 
     local outJson_str = [[{"data":"]] .. NoCRs_str .. [[" ,"width":"]] .. width .. [[","height":"]] .. height .. [[","fromSoftware":"nuke"}]]
 
-    local fp = io.open(path, "w")
+    local fp = io.open(pathNormalizeSlashes_str, "w")
     if fp == nil then
         error(string.format("file could not be created: %s", path))
     else
@@ -102,7 +119,7 @@ function JSONToFile(node_str, width, height)
         fp:close()
     end
     
-    return path
+    return pathNormalizeSlashes_str
 end
 
 function CopyFromClipboard()
@@ -183,15 +200,10 @@ function Main()
         error("[Curl Filepath] There is an invalid Fusion platform detected")
     end
 
-    local launchCommand = ""
-    if platform == "Windows" then
-        launchCommand = [["]] .. tostring(curlFile) .. [[" "]] .. nusionServerIP .. [[/convert" -X POST -H "Accept: */*" -H "Accept-Encoding: gzip, deflate, br, zstd" -H "Referer: ]] .. nusionServerIP .. [[/" -H "Content-Type: application/json" -H "Origin: ]] .. nusionServerIP .. [[" -H "Connection: keep-alive" --data-ascii "@]] .. jsonFile .. [["]]
-    else
-        launchCommand = [["]] .. tostring(curlFile) .. [[" "]] .. nusionServerIP .. [[/convert" -X POST -H "Accept: */*" -H "Accept-Encoding: gzip, deflate, br, zstd" -H "Referer: ]] .. nusionServerIP .. [[/" -H "Content-Type: application/json" -H "Origin: ]] .. nusionServerIP .. [[" -H "Connection: keep-alive" --data-ascii "@]] .. jsonFile .. [["]]
-    end
+    local curlOutput = curlOutputFilename()
 
-    local json_str = System(launchCommand)
-    local fusionComp_str = GetJSONKey(json_str, "result") or ""
+    local launchCommand = [["]] .. tostring(curlFile) .. [[" "]] .. nusionServerIP .. [[/convert" -X POST -H "Accept: */*" -H "Accept-Encoding: gzip, deflate, br, zstd" -H "Referer: ]] .. nusionServerIP .. [[/" -H "Content-Type: application/json" -H "Origin: ]] .. nusionServerIP .. [[" -H "Connection: keep-alive" --data-ascii "@]] .. jsonFile .. [[" --output "]] .. curlOutput .. [["]]
+    local result = System(launchCommand)
 
     if show_dump == 1 then
         print("\n----------------------")
@@ -202,15 +214,31 @@ function Main()
         print(launchCommand)
 
         print("\n[CLI Output] ")
-        print(json_str)
+        print(result)
     end
 
+    local json_str = "{}"
+    local fp = io.open(curlOutput, "r")
+    if fp == nil then
+        print(string.format("cURL output JSON file does not exist: %s", curlOutput))
+    else
+        json_str = fp:read("*all")
+        fp:close()
+    end
+    local fusionComp_str = GetJSONKey(json_str, "result") or ""
+
+    if show_dump == 1 then
+        print("\n[cURL JSON Output] ")
+        print(json_str)
+    end
+    
     -- Check if the clipboard contents is a table
     local clipboard_tbl = {}
     if fusionComp_str then
         clipboard_tbl = bmd.readstring(fusionComp_str) or {}
         -- Add the macro snippet to your foreground comp
         comp:Paste(clipboard_tbl)
+        bmd.setclipboard(nukeScript_str)
     end
 
     if show_dump == 1 then
