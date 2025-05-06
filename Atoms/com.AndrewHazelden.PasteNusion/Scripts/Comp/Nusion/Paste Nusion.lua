@@ -1,5 +1,5 @@
 --[[--
-Paste Nusion.lua - 2025-05-06 07.13 AM
+Paste Nusion.lua - 2025-05-06 07.18 AM
 Ported by Andrew Hazelden <andrew@andrewhazelden.com>
 
 The "Edit > Paste Nusion" menu item lets you paste a Foundry Nuke node from your clipboard and have it instantly translated into the corresponding Fusion Studio node.
@@ -89,7 +89,7 @@ function CopyFromClipboard()
     else
         -- macOS
         -- A workaround is used since bmd.getclipboard() deletes the last character in a string in Fusion v16-17 on macOS
-        local dir = comp:MapPath('Temp:\\Vonk\\')
+        local dir = comp:MapPath('Temp:\\Nusion\\')
         bmd.createdir(dir)
         local path = dir .. 'ClipboardText.txt'
 
@@ -117,8 +117,9 @@ function Main()
     local show_dump = 1
 
     -- Comp Resolution
-    local width = tostring(1920)
-    local height = tostring(1080)
+    local formatPrefs = comp:GetPrefs("Comp.FrameFormat")
+    local width = tostring(formatPrefs.Width or 1920)
+    local height = tostring(formatPrefs.Height or 1080)
 
     -- Nusion Web app IP address
     -- Default port is "5000"
