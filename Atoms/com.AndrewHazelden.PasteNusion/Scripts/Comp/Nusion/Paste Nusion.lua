@@ -1,5 +1,5 @@
 --[[--
-Paste Nusion.lua - 2025-05-06 10.33 AM
+Paste Nusion.lua - 2025-05-06 6.44 PM
 Ported by Andrew Hazelden <andrew@andrewhazelden.com>
 
 The "Edit > Paste Nusion" menu item lets you paste a Foundry Nuke node from your clipboard and have it instantly translated into the corresponding Fusion Studio node.
@@ -25,8 +25,8 @@ Blur {
 function System(commandString)
     local platform = GetPlatform()
     if platform == "Windows" then
-        os.execute([[start "" ]] .. commandString)
-        bmd.wait(2)
+        os.execute([[start "" /wait ]] .. commandString)
+        -- bmd.wait(2)
         return ""
     else
         local handler = io.popen(commandString);
