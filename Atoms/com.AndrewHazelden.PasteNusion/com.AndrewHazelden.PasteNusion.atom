@@ -3,7 +3,7 @@ Atom {
 	Category = "Scripts/Comp",
 	Author = "Andrew Hazelden",
 	Version = 1,
-	Date = {2025, 5, 5},
+	Date = {2025, 5, 6},
 	Description = [[<h2>Nusion</h2>
 
 <p>The "Edit &gt; Paste Nusion" menu item lets you paste a Foundry Nuke node from your clipboard and have it instantly translated into the corresponding Fusion Studio node.</p>
