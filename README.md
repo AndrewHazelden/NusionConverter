@@ -82,6 +82,8 @@ python -m venv nusion
 %USERPROFILE%/nusion/Scripts/activate.bat
 ```
 
+![Nusion CLI](docs/images/w4_python_venv.png)
+
 Clone the repo, and install the dependencies using the Python pip package manager:
 
 ```bash
@@ -93,6 +95,10 @@ cd %USERPROFILE%/NusionConverter/
 pip install -r requirements.txt
 ```
 
+![Nusion CLI](docs/images/w2_git_clone.png)
+
+![Nusion CLI](docs/images/w3_pip_requirements.png)
+
 Activate the Python virtual environment and start the Flask app:
 
 ```bash
@@ -100,6 +106,16 @@ Activate the Python virtual environment and start the Flask app:
 cd %USERPROFILE%/NusionConverter/app
 flask run
 ```
+
+![Nusion CLI](docs/images/w1_flask_run_win.png)
+
+Open a webbrowser session to view the web app:
+
+```bash
+start http://127.0.0.1:5000/
+```
+
+![Nusion CLI](docs/images/w5_webbrowser.png)
 
 ### macOS Install:
 
