@@ -166,7 +166,7 @@ There is a beta version of a "Paste Nusion" Reactor atom package available from 
 
 ### Paste Nusion Usage: 
 
-1. Start the Nussion web appin a terminal window.
+1. Start the Nussion Web app in a terminal window.
 2. Copy your Nuke node snippet into your clipboard buffer.
 3. Open Fusion Studio. Run the "Edit > Paste Nusion" menu item to automatically convert the nodes, and add them to your currently open Fusion comp.
 
