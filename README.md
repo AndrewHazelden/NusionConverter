@@ -13,7 +13,7 @@ Nusion is a Web app to convert nodes between Foundry's Nuke and Blackmagic Desig
 
 ![Webapp](docs/images/screenshot.png)
 
-## Supported Notes
+## Supported Nodes
 Lots of supported nodes are on the way!
 
 Nuke to Fusion
