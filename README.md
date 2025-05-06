@@ -56,18 +56,48 @@ To test the nusion web app, you can copy/paste the following Nuke blur node snip
 
 ### Windows Install:
 
-Use [pip](https://pip.pypa.io/en/stable/) and [NPM](https://www.npmjs.com/get-npm/) to install project dependencies.
+Let's use the Winget package manager to install NodeJS / NPM in the Command Prompt window:
 
 ```bash
+winget install OpenJS.NodeJS
+```
+
+Python 3.11 can be installed using Winget in the Command Prompt window:
+
+```bash
+winget install python.python.3.13
+```
+
+git can be installed using Winget in the Command Prompt window:
+
+```bash
+winget install git.git
+```
+
+Create a new Python virtual environment:
+
+```bash
+cd %USERPROFILE%
+python -m venv nusion
+%USERPROFILE%/nusion/Scripts/activate.bat
+```
+
+Clone the repo, and install the dependencies using the Python pip package manager:
+
+```bash
+python -m pip install --upgrade pip
+pip install flask
+cd %USERPROFILE%
+git clone https://github.com/AndrewHazelden/NusionConverter.git
+cd %USERPROFILE%/NusionConverter/
 pip install -r requirements.txt
 ```
-```bash
-npm install
-```
-Start the Flask development server.
+
+Activate the Python virtual environment and start the Flask app:
 
 ```bash
-cd NusionConverter/app
+%USERPROFILE%/nusion/Scripts/activate.bat
+cd %USERPROFILE%/NusionConverter/app
 flask run
 ```
 
