@@ -1,5 +1,5 @@
 --[[--
-Paste Nusion.lua - 2025-05-05 06.25 PM
+Paste Nusion.lua - 2025-05-06 07.13 AM
 Ported by Andrew Hazelden <andrew@andrewhazelden.com>
 
 The "Edit > Paste Nusion" menu item lets you paste a Foundry Nuke node from your clipboard and have it instantly translated into the corresponding Fusion Studio node.
@@ -94,7 +94,7 @@ function CopyFromClipboard()
         local path = dir .. 'ClipboardText.txt'
 
         command = 'pbpaste > "' .. path .. '"'
-        print('[Copy Text to Clipboard Command]' , command)
+        print('[Copy Text to Clipboard Command] ' , command)
         os.execute(command)
 
         local fp = io.open(path, "r")
@@ -182,7 +182,7 @@ function Main()
     if show_dump == 1 then
         print("\n[Fusion Comp Output] ")
         dump(fusionComp_str)
-        print('[Clipboard Contents]\n')
+        print("\n[Clipboard Contents]")
         dump(clipboard_tbl)
     end
 end
