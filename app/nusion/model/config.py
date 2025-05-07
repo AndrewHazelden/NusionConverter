@@ -10,6 +10,7 @@ NUKE_TO_FUSION_NODE_NAMES = {
     "Transform": "Transform",
     "Unpremult": "AlphaDivide",
     "Write": "Saver",
+    "Dot": "PipeRouter",
     }
 
 #Invert NUKE_TO_FUSION dict

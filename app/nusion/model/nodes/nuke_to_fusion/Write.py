@@ -20,6 +20,8 @@ def convert(node):
             fusion_effect_attribs["Clip"] = f"Input {{ Value = Clip {{ Filename = '{value}', }} }}"
         if knob == "_jpeg_quality":
             fusion_effect_attribs["['JpegFormat.Quality']"] = f"Input {{ Value = {value}, }}"
+        if knob == "_jpeg_sub_sampling":
+            fusion_effect_attribs["['JpegFormat.ChromaSubsampling']"] = f"Input {{ Value = 1, }}"
     return fusion_effect_attribs
 
 if __name__ == '__main__':
