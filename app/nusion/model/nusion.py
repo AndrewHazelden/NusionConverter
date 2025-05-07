@@ -15,7 +15,7 @@ class Project:
     def convert_copy_paste(self):
         raw_lines = self.raw_data.splitlines()
         for i, line in enumerate(raw_lines):
-             if re.match("[A-Z]\w+\s\{", line):
+             if re.match(r"[A-Z]\w+\s\{", line):
                 nuke_node = Node.from_nuke(raw_lines[i:], self.resolution)
                 fusion_node = nuke_node.to_fusion()
                 result = f"{{\nTools = ordered() {{\n{fusion_node.output()}\n}}\n}}"
