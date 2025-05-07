@@ -23,21 +23,17 @@ To make this task easier, there are existing node definition scripts in the "nuk
 Start by adding the Nuke node name to the end of the import items on this line:
 
 ```py
-from nusion.model.nodes.nuke_to_fusion import   BaseAttributes, \
+from nusion.model.nodes.nuke_to_fusion import (
 ```
-
-![New Nodes](images/new_nodes_init_1.png)
-
-Lower down in the script, in the "def convert(node)" section we can add an extra "node.effect" entry for the Nuke node that we want to add support for.
+Also add the Nuke node name to the end of the items on this line:
 
 ```py
-if node.effect == "Write":
-    return base_attribs, {**common_attribs, **Write.convert(node)}
+__all__ = (
 ```
 
-When defining the attributes for the node.effect entry, take a note how the "**Write.convert(node)" parameter is telling Nusion to look in the corresponding "&lt;node-name&gt;.py" python file, and to run the script's "convert()" function.
 
-![New Nodes](images/new_nodes_init_2.png)
+![New Nodes](images/new_nodes_init.png)
+
 
 3. Update the config.py file to define how the node names are mapped during the conversion process:
 
