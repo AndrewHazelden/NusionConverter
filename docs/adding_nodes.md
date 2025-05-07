@@ -1,12 +1,12 @@
 # Add Support for New Nodes
 
-One of Nusion's most powerful features is that you can add support for additional Nuke nodes with only a few small changes to the included Python scripts. This makes it possible to map any Nuke node to a corresponding Fusion native node, 3rd party FusionSDK node, fuse, or potentially to a custom Fusion macro.
+One of Nusion's most powerful features is that you can add support for additional Nuke nodes with only a few small changes to the included Python scripts. This makes it possible to map any Nuke node to a corresponding Fusion native node, OpenFX plugin, FusionSDK plugin, DCTL, Fuse, or potentially to a custom Fusion macro.
 
 ## Create a new Node Entry
 
-1. Start by creating a new python script that has a filename prefix that matches the Nuke node name you want to add support for:
+1. Start by creating a new Python script that has a filename prefix that matches the Nuke node name you want to add support for:
 
-- app/nusion/model/nodes/nuke_to_fusion/&lt;node-name&gt;.py
+        app/nusion/model/nodes/nuke_to_fusion/<node-name>.py
 
 For example, if the Nuke node name is "Write", then the Python script would be called "Write.py".
 
@@ -16,9 +16,9 @@ To make this task easier, there are existing node definition scripts in the "nuk
 
 ![New Nodes](images/new_nodes_nuke_to_fusion_dir.png)
 
-2. To let Nusion know that a new node type exists, the "nuke_to_fusion" folder has an "\_\_init\_\_.py" file that needs to be edited as well. The file is located at:
+2. Nusion needs to be told to look for the newly added "&lt;node-name&gt;.py" python script. This is done by looking in the "nuke_to_fusion" folder and editing the "\_\_init\_\_.py" file. The file is located at:
 
-- app/nusion/model/nodes/nuke_to_fusion/\_\_init\_\_.py
+        app/nusion/model/nodes/nuke_to_fusion/__init__.py
 
 Start by adding the Nuke node name to the end of the import items on this line:
 
@@ -28,18 +28,20 @@ from nusion.model.nodes.nuke_to_fusion import   BaseAttributes, \
 
 ![New Nodes](images/new_nodes_init_1.png)
 
-Lower down in the script, in the "def convert(node)" section you need to add an extra "node.effect" entry for the Nuke node you want to add support for:
+Lower down in the script, in the "def convert(node)" section we can add an extra "node.effect" entry for the Nuke node that we want to add support for.
 
 ```py
 if node.effect == "Write":
-    return base_attribs, {**common_attribs, **Premult.convert(node)}
+    return base_attribs, {**common_attribs, **Write.convert(node)}
 ```
+
+When defining the attributes for the node.effect entry, take a note how the "**Write.convert(node)" parameter is telling Nusion to look in the corresponding "&lt;node-name&gt;.py" python file, and to run the script's "convert()" function.
 
 ![New Nodes](images/new_nodes_init_2.png)
 
 3. Update the config.py file to define how the node names are mapped during the conversion process:
 
-- app/nusion/model/config.py
+        app/nusion/model/config.py
 
 Edit the "NUKE_TO_FUSION_NODE_NAMES = {" section to add the mapping from the original Nuke node name to the appropriate Fusion node name:
 
@@ -53,7 +55,7 @@ Edit the "NUKE_TO_FUSION_NODE_NAMES = {" section to add the mapping from the ori
 
 Finally, you can edit the Nusion Web app's HTML code to indicate the node is now a supported node type. The file is located at:
 
-- app/templates/form.html
+        app/templates/form.html
 
 Look for the HTML code that starts on the line and then add your node to the list:
 
