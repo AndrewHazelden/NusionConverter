@@ -3,16 +3,18 @@ Import all effects from the nodes folder to allow them to be easily called from
 other scripts using the node's effect type attribute.
 """
 
-from nusion.model.nodes.nuke_to_fusion import   BaseAttributes, \
-                                                CommonAttributes, \
-                                                Blur, \
-                                                ColorCorrect, \
-                                                Transform, \
-                                                Invert, \
-                                                Premult, \
-                                                Unpremult, \
-                                                Write, \
-                                                Dot
+from nusion.model.nodes.nuke_to_fusion import (
+    BaseAttributes,
+    CommonAttributes,
+    Blur,
+    ColorCorrect,
+    Transform,
+    Invert,
+    Premult,
+    Unpremult,
+    Write,
+    Dot,
+)
 
 def convert(node):
     """ List of effect conversion functions """
