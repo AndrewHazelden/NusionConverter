@@ -5,10 +5,11 @@ Configuration file
 NUKE_TO_FUSION_NODE_NAMES = {
     "Blur": "Blur",
     "ColorCorrect": "ColorCorrector",
-    "Transform": "Transform",
     "Invert": "ChannelBoolean",
     "Premult": "AlphaMultiply",
+    "Transform": "Transform",
     "Unpremult": "AlphaDivide",
+    "Write": "Saver",
     }
 
 #Invert NUKE_TO_FUSION dict
@@ -46,7 +47,7 @@ NUKE_BASE_ATTRIBUTES = [
 NUKE_IGNORE_ATTRIBUTES = [
     "selected",
     "channel", #duplicate of "channels"
-        ]
+    ]
 
 
 
@@ -62,4 +63,4 @@ FUSION_VIEWINFO = [
 FUSION_COLOR = [
     "TileColor",
     "TextColor",
-]
+    ]

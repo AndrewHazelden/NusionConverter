@@ -10,7 +10,8 @@ from nusion.model.nodes.nuke_to_fusion import   BaseAttributes, \
                                                 Transform, \
                                                 Invert, \
                                                 Premult, \
-                                                Unpremult
+                                                Unpremult, \
+                                                Write
 
 def convert(node):
     """ List of effect conversion functions """
@@ -35,5 +36,8 @@ def convert(node):
 
     if node.effect == "Unpremult":
         return base_attribs, {**common_attribs, **Premult.convert(node)}
+
+    if node.effect == "Write":
+        return base_attribs, {**common_attribs, **Write.convert(node)}
 
     raise ValueError("Node effect '{0}' not currently supported.".format(node.effect))
