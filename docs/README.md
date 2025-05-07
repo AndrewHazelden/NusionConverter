@@ -23,6 +23,7 @@ Nuke to Fusion
 - Invert
 - Premult
 - Unpremult
+- Write
 - ColorCorrect (Coming soon!)
 
 Fusion to Nuke
