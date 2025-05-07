@@ -3,45 +3,43 @@ Import all effects from the nodes folder to allow them to be easily called from
 other scripts using the node's effect type attribute.
 """
 
-from nusion.model.nodes.nuke_to_fusion import   BaseAttributes, \
-                                                CommonAttributes, \
-                                                Blur, \
-                                                ColorCorrect, \
-                                                Transform, \
-                                                Invert, \
-                                                Premult, \
-                                                Unpremult, \
-                                                Write, \
-                                                Dot
+from nusion.model.nodes.nuke_to_fusion import (
+    BaseAttributes,
+    CommonAttributes,
+    Blur,
+    ColorCorrect,
+    Transform,
+    Invert,
+    Premult,
+    Unpremult,
+    Write,
+    Dot,
+)
+
+__all__ = (
+    "BaseAttributes",
+    "CommonAttributes",
+    "Blur",
+    "ColorCorrect",
+    "Transform",
+    "Invert",
+    "Premult",
+    "Unpremult",
+    "Write",
+    "Dot",
+)
+
+# Utility modules that shouldn't be treated as node converters
+UTILITY_MODULES = {"BaseAttributes", "CommonAttributes"}
 
 def convert(node):
-    """ List of effect conversion functions """
-
+    """Convert node based on its effect type"""
     base_attribs = BaseAttributes.convert(node)
     common_attribs = CommonAttributes.convert(node)
-
-    if node.effect == "Blur":
-        return base_attribs, {**common_attribs, **Blur.convert(node)}
-
-    if node.effect == "ColorCorrect":
-        return base_attribs, {**common_attribs, **ColorCorrect.convert(node)}
-
-    if node.effect == "Transform":
-        return base_attribs, {**common_attribs, **Transform.convert(node)}
-
-    if node.effect == "Invert":
-        return base_attribs, {**common_attribs, **Invert.convert(node)}
-
-    if node.effect == "Premult":
-        return base_attribs, {**common_attribs, **Premult.convert(node)}
-
-    if node.effect == "Unpremult":
-        return base_attribs, {**common_attribs, **Premult.convert(node)}
-
-    if node.effect == "Write":
-        return base_attribs, {**common_attribs, **Write.convert(node)}
-
-    if node.effect == "Dot":
-        return base_attribs, {**common_attribs, **Dot.convert(node)}
-
-    raise ValueError("Node effect '{0}' not currently supported.".format(node.effect))
+    
+    if node.effect in __all__ and node.effect not in UTILITY_MODULES:
+        # Use globals() to dynamically get the module by name
+        converter = globals()[node.effect]
+        return base_attribs, {**common_attribs, **converter.convert(node)}
+        
+    raise ValueError(f"Node effect '{node.effect}' not currently supported.")
