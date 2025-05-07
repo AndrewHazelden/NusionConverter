@@ -1,5 +1,5 @@
 --[[--
-Paste Nusion.lua - 2025-05-06 6.44 PM
+Paste Nusion.lua - 2025-05-07 04.28 PM
 Ported by Andrew Hazelden <andrew@andrewhazelden.com>
 
 The "Edit > Paste Nusion" menu item lets you paste a Foundry Nuke node from your clipboard and have it instantly translated into the corresponding Fusion Studio node.
@@ -145,6 +145,7 @@ function CopyFromClipboard()
         else
             out = fp:read("*all")
             fp:close()
+            os.remove(path)
         end
     end
 
@@ -226,7 +227,8 @@ function Main()
         fp:close()
     end
 
-    -- Remove the JSON file
+    -- Remove the JSON files
+    os.remove(jsonFile)
     os.remove(curlOutput)
 
     local fusionComp_str = GetJSONKey(json_str, "result") or ""
