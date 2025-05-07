@@ -7,13 +7,18 @@
                                                                                                 
 ```
 
-Nusion is a Web app to convert nodes between Foundry's Nuke and Blackmagic Design's Fusion Studio compositing software.
+Nusion is a Web app to convert nodes between Foundry's Nuke and Blackmagic Design's Fusion Studio compositing software. There is a Fusion Studio integration plugin that adds an "Edit &gt; Paste Nusion" menu item.
 
 ## Screenshot
 
-![Webapp](docs/images/screenshot.png)
+![Webapp](docs/images/screenshot.png ':size=650')
+
+If you have Blackmagic Fusion Studio, the "Paste Nusion" menu entry and Lua comp script allows you to convert a Foundry Nuke .nk node snippet into a BMD Fusion Studio native node. The result is pasted directly into your composite.
+
+![Paste Nusion](docs/images/paste_nusion.png ':size=650')
 
 ## Supported Nodes
+
 Lots of supported nodes are on the way!
 
 Nuke to Fusion
@@ -48,7 +53,6 @@ To test the nusion web app, you can copy/paste the following Nuke blur node snip
 The Nusion Web app was created by Jonty Pressinger. The Nusion integration for Fusion Studio was created by Andrew Hazelden.
 
 - [MIT](https://choosealicense.com/licenses/mit/) Open-Source License
-
 
 ## For More Info
 
