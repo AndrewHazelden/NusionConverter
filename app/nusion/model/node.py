@@ -55,8 +55,10 @@ class Node():
         """
         base_attribs = {}
         effect_attribs = {}
+        effect = node_raw[0].replace(" {", "")
         for item in node_raw[1:-1]:
             attrib = item.split(" ")[0]
+            # print(effect, attrib)
             if attrib not in config.NUKE_IGNORE_ATTRIBUTES:
                 if attrib in config.NUKE_BASE_ATTRIBUTES:
                     base_attribs[attrib] = item.replace(attrib, "").strip()
@@ -102,9 +104,10 @@ class FusionNode(Node):
         output_effect_attribs = ""
         output_base_attribs = ""
         output_viewinfo_attribs = ""
+        output_clip_attribs = ""
         output_color_attribs = ""
         for i, effect in enumerate(self.effect_attribs):
-            output_effect_attribs += f"{effect} = {self.effect_attribs[effect]},"
+            output_effect_attribs += f"\t{effect} = {self.effect_attribs[effect]},"
             if i != len(self.effect_attribs)-1:
                 #Add newline character if this is not the last effect attribute.
                 output_effect_attribs += "\n"
@@ -114,22 +117,27 @@ class FusionNode(Node):
             else:
                 if attrib in config.FUSION_VIEWINFO:
                     output_viewinfo_attribs += f"{self.base_attribs[attrib]},\n"
+                elif attrib in config.FUSION_CLIP:
+                    output_clip_attribs += f"{self.base_attribs[attrib]},\n"
                 elif attrib in config.FUSION_COLOR:
                     output_color_attribs += f"{self.base_attribs[attrib]},\n"
                 else:
                     output_base_attribs += f"{self.base_attribs[attrib]},\n"
 
         if output_effect_attribs:
-            output_effect_attribs = f"Inputs = {{\n{output_effect_attribs}\n}},"
+            output_effect_attribs = f"\t\t\tInputs = {{\n{output_effect_attribs}\n\t\t\t}},"
         if output_viewinfo_attribs:
-            output_viewinfo_attribs = f"ViewInfo = OperatorInfo {{\n{output_viewinfo_attribs}\n}},"
+            output_viewinfo_attribs = f"\t\t\tViewInfo = OperatorInfo {{\n{output_viewinfo_attribs}\n\t\t\t}},"
+        if output_clip_attribs:
+            output_clip_attribs = f"\t\tClips = {{\n{output_clip_attribs}\n\t\t}},"
         if output_color_attribs:
-            output_color_attribs = f"Colors = {{\n{output_color_attribs}\n}},"
+            output_color_attribs = f"\t\tColors = {{\n{output_color_attribs}\n\t\t}},"
 
         node_output = f"{self.name} = {self.effect} {{\n" \
                         f"{output_base_attribs}\n" \
                         f"{output_effect_attribs}\n" \
                         f"{output_viewinfo_attribs}\n" \
+                        f"{output_clip_attribs}\n" \
                         f"{output_color_attribs}\n" \
                         f"}}"
 

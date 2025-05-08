@@ -16,12 +16,13 @@ def convert(node):
     for knob in nuke_effect_attribs:
         value = nuke_effect_attribs[knob]
 
-        if knob == "file":
-            fusion_effect_attribs["Clip"] = f"Input {{ Value = Clip {{ Filename = '{value}', }} }}"
-        if knob == "_jpeg_quality":
-            fusion_effect_attribs["['JpegFormat.Quality']"] = f"Input {{ Value = {value}, }}"
-        if knob == "_jpeg_sub_sampling":
-            fusion_effect_attribs["['JpegFormat.ChromaSubsampling']"] = f"Input {{ Value = 1, }}"
+#         if knob == "file":
+#             # This is masked by the BaseAttribute implementation
+#             fusion_effect_attribs["Clip"] = f"Input {{ Value = Clip {{ Filename = '{value}', }} }}"
+#         if knob == "_jpeg_quality":
+#             fusion_effect_attribs["\t\t\t['JpegFormat.Quality']"] = f"Input {{ Value = {value}, }}"
+#         if knob == "_jpeg_sub_sampling":
+#             fusion_effect_attribs["\t\t\t['JpegFormat.ChromaSubsampling']"] = f"Input {{ Value = 1, }}"
     return fusion_effect_attribs
 
 if __name__ == '__main__':

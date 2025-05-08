@@ -11,9 +11,9 @@ def convert(node):
     nuke_effect_attribs = node.effect_attribs
     fusion_effect_attribs = {}
 
-    fusion_effect_attribs["ReferenceSize"] = "Input {Value = 1, }"
-    fusion_effect_attribs["Width"] = f"Input {{Value = {node.root_width}, }}"
-    fusion_effect_attribs["Height"] = f"Input {{Value = {node.root_height}, }}"
+    fusion_effect_attribs["\t\t\tReferenceSize"] = "Input {Value = 1, }"
+    fusion_effect_attribs["\t\t\tWidth"] = f"Input {{Value = {node.root_width}, }}"
+    fusion_effect_attribs["\t\t\tHeight"] = f"Input {{Value = {node.root_height}, }}"
 
     shutter_offset = "None"
 
@@ -21,16 +21,16 @@ def convert(node):
         value = nuke_effect_attribs[knob]
 
         if knob == "rotate":
-            fusion_effect_attribs["Angle"] = f"Input {{Value = {value}, }}"
+            fusion_effect_attribs["\t\t\tAngle"] = f"Input {{Value = {value}, }}"
 
         if knob == "scale":
             if value.startswith("{"): # Scale is not uniform.
-                fusion_effect_attribs["UseSizeAndAspect"] = "Input {Value = 0, }"
+                fusion_effect_attribs["\t\t\tUseSizeAndAspect"] = "Input {Value = 0, }"
                 size_x, size_y = value.replace("{", "").replace("}", "").split(" ")
-                fusion_effect_attribs["XSize"] = f"Input {{ Value = {size_x}, }}"
-                fusion_effect_attribs["YSize"] = f"Input {{ Value = {size_y}, }}"
+                fusion_effect_attribs["\t\t\tXSize"] = f"Input {{ Value = {size_x}, }}"
+                fusion_effect_attribs["\t\t\tYSize"] = f"Input {{ Value = {size_y}, }}"
             else: # Scale is uniform.
-                fusion_effect_attribs["Size"] = f"Input {{ Value = {value}, }}"
+                fusion_effect_attribs["\t\t\tSize"] = f"Input {{ Value = {value}, }}"
 
         if knob == "center":
             value = value.replace("{", "").replace("}", "").split(" ")
@@ -38,7 +38,7 @@ def convert(node):
             nuke_center_y = float(value[1])
             fusion_center_x = nuke_center_x / node.root_width
             fusion_center_y = nuke_center_y / node.root_height
-            fusion_effect_attribs["Pivot"] = \
+            fusion_effect_attribs["\t\t\tPivot"] = \
                 f"Input {{Value = {{ {fusion_center_x}, {fusion_center_y} }}, }}"
 
         if knob == "translate":
@@ -53,10 +53,10 @@ def convert(node):
                 f"Input {{Value = {{ {fusion_translate_x}, {fusion_translate_y} }}, }}"
 
         if knob == "invert_matrix" and value == "true":
-            fusion_effect_attribs["InvertTransform"] = "Input {Value = 1, }"
+            fusion_effect_attribs["\t\t\tInvertTransform"] = "Input {Value = 1, }"
 
         if knob == "black_outside" and value == "false":
-            fusion_effect_attribs["Edges"] = "Input {Value = 2, }"
+            fusion_effect_attribs["\t\t\tEdges"] = "Input {Value = 2, }"
 
         if knob == "filter":
             # These are the closest matching filters I could find between the packages.
@@ -98,11 +98,11 @@ def convert(node):
                 filter_selection = "9"
 
             if filter_selection != "None":
-                fusion_effect_attribs["FilterMethod"] = f"Input {{Value = {filter_selection}, }}"
+                fusion_effect_attribs["\t\t\tFilterMethod"] = f"Input {{Value = {filter_selection}, }}"
 
         if knob == "motionblur":
-            fusion_effect_attribs["MotionBlur"] = "Input {Value = 1, }"
-            fusion_effect_attribs["Quality"] = f"Input {{ Value = {value}, }}"
+            fusion_effect_attribs["\t\t\tMotionBlur"] = "Input {Value = 1, }"
+            fusion_effect_attribs["\t\t\tQuality"] = f"Input {{ Value = {value}, }}"
             shutter_offset = "-1.0" # Nuke's default
 
         if knob == "shutteroffset":
@@ -119,11 +119,11 @@ def convert(node):
             shutter_offset = value
 
         if shutter_offset != "None":
-            fusion_effect_attribs["CenterBias"] = f"Input {{Value = {shutter_offset}, }}"
+            fusion_effect_attribs["\t\t\tCenterBias"] = f"Input {{Value = {shutter_offset}, }}"
 
         if knob == "shutter":
             shutter_degrees = float(value) * 360
-            fusion_effect_attribs["ShutterAngle"] = f"Input {{ Value = {shutter_degrees}, }}"
+            fusion_effect_attribs["\t\t\tShutterAngle"] = f"Input {{ Value = {shutter_degrees}, }}"
 
         if knob in ("skew", "skew_order"):
             # The default transform doesn't support this.

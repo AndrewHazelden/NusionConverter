@@ -16,14 +16,14 @@ def convert(node):
         if knob == "gain":
             if value.startswith("{"): # Multiple channels
                 split_value = value.replace("{", "").replace("}", "").split(" ")
-                fusion_effect_attribs["MasterRedGain"] = \
+                fusion_effect_attribs["\t\t\tMasterRedGain"] = \
                     f"Input {{Value = {split_value[0]}, }}"
-                fusion_effect_attribs["MasterGreenGain"] = \
+                fusion_effect_attribs["\t\t\tMasterGreenGain"] = \
                     f"Input {{Value = {split_value[1]}, }}"
-                fusion_effect_attribs["MasterBlueGain"] = \
+                fusion_effect_attribs["\t\t\tMasterBlueGain"] = \
                     f"Input {{Value = {split_value[2]}, }}"
             else: #Master channel
-                fusion_effect_attribs["MasterRGBGain"] = \
+                fusion_effect_attribs["\t\t\tMasterRGBGain"] = \
                     f"Input {{Value = {value}, }}"
 
         if ".gain" in knob:
@@ -46,14 +46,14 @@ def convert(node):
         if knob == "gamma":
             if value.startswith("{"): # Multiple channels
                 split_value = value.replace("{", "").replace("}", "").split(" ")
-                fusion_effect_attribs["MasterRedGamma"] = \
+                fusion_effect_attribs["\t\t\tMasterRedGamma"] = \
                     f"Input {{Value = {split_value[0]}, }}"
-                fusion_effect_attribs["MasterGreenGamma"] = \
+                fusion_effect_attribs["\t\t\tMasterGreenGamma"] = \
                     f"Input {{Value = {split_value[1]}, }}"
-                fusion_effect_attribs["MasterBlueGamma"] = \
+                fusion_effect_attribs["\t\t\tMasterBlueGamma"] = \
                     f"Input {{Value = {split_value[2]}, }}"
             else: #Master channel
-                fusion_effect_attribs["MasterRGBGamma"] = \
+                fusion_effect_attribs["\t\t\tMasterRGBGamma"] = \
                     f"Input {{Value = {value}, }}"
 
         if ".gamma" in knob:
@@ -76,14 +76,14 @@ def convert(node):
         if knob == "offset":
             if value.startswith("{"): # Multiple channels
                 split_value = value.replace("{", "").replace("}", "").split(" ")
-                fusion_effect_attribs["MasterRedBrightness"] = \
+                fusion_effect_attribs["\t\t\tMasterRedBrightness"] = \
                     f"Input {{Value = {split_value[0]}, }}"
-                fusion_effect_attribs["MasterGreenBrightness"] = \
+                fusion_effect_attribs["\t\t\tMasterGreenBrightness"] = \
                     f"Input {{Value = {split_value[1]}, }}"
-                fusion_effect_attribs["MasterBlueBrightness"] = \
+                fusion_effect_attribs["\t\t\tMasterBlueBrightness"] = \
                     f"Input {{Value = {split_value[2]}, }}"
             else: #Master channel
-                fusion_effect_attribs["MasterRGBBrightness"] = \
+                fusion_effect_attribs["\t\t\tMasterRGBBrightness"] = \
                     f"Input {{Value = {value}, }}"
 
         if ".offset" in knob:
@@ -104,10 +104,10 @@ def convert(node):
                     f"Input {{Value = {value}, }}"
 
     #Match nuke default process order (Gamma before levels)
-    fusion_effect_attribs["ProcessOrder"] = "Input { Value = 0, }"
+    fusion_effect_attribs["\t\t\tProcessOrder"] = "Input { Value = 0, }"
 
     #Match nuke default Ranges curve
-    fusion_effect_attribs["ColorRanges"] = \
+    fusion_effect_attribs["\t\t\tColorRanges"] = \
             "Input { Value = ColorCurves " \
             "{ Curves = { " \
             "{ Points = { { 0, 1 }, { 0.0288, 0.9956 }, { 0.0611, 0 }, { 0.09, 0 } } }, " \

@@ -33,8 +33,8 @@ def convert(node):
 
         if knob == "size":
             if value.startswith("{"): # Blur scale is not uniform.
-                fusion_effect_attribs["LockXY"] = "Input {Value = 0, }"
-                value = value.replace("{", "").replace("}", "").split(" ")
+                fusion_effect_attribs["\t\t\tLockXY"] = "Input {Value = 0, }"
+                value = value.replace("{", "").replace("}", "").split("\t\t\t")
                 blur_size_nuke_x = float(value[0])
                 blur_size_nuke_y = float(value[1])
                 fusion_value_x = round( \
@@ -43,12 +43,12 @@ def convert(node):
                 fusion_value_y = round(\
                     (base_ratio * (blur_size_nuke_y / 10)) / conversion_ratio_y, 5 \
                         )
-                fusion_effect_attribs["XBlurSize"] = f"Input {{ Value = {fusion_value_x}, }}"
-                fusion_effect_attribs["YBlurSize"] = f"Input {{ Value = {fusion_value_y}, }}"
+                fusion_effect_attribs["\t\t\tXBlurSize"] = f"Input {{ Value = {fusion_value_x}, }}"
+                fusion_effect_attribs["\t\t\tYBlurSize"] = f"Input {{ Value = {fusion_value_y}, }}"
             else: # Blur scale is uniform.
                 blur_size_nuke = float(value)
                 fusion_value = round((base_ratio * (blur_size_nuke / 10)) / conversion_ratio_x, 5)
-                fusion_effect_attribs["XBlurSize"] = f"Input {{ Value = {fusion_value}, }}"
+                fusion_effect_attribs["\t\t\tXBlurSize"] = f"Input {{ Value = {fusion_value}, }}"
 
         if knob == "channels":
             # This is a duplicate of the conversion found in CommonAttributes.
@@ -61,20 +61,20 @@ def convert(node):
                 #TODO: Flag to user if there are any extra channels in the pipe.
                 pass
             if value == "rgb":
-                fusion_effect_attribs["Alpha"] = "Input {Value = 0, }"
+                fusion_effect_attribs["\t\t\tAlpha"] = "Input {Value = 0, }"
             if value == "alpha":
-                fusion_effect_attribs["Red"] = "Input {Value = 0, }"
-                fusion_effect_attribs["Green"] = "Input {Value = 0, }"
-                fusion_effect_attribs["Blue"] = "Input {Value = 0, }"
+                fusion_effect_attribs["\t\t\tRed"] = "Input {Value = 0, }"
+                fusion_effect_attribs["\t\t\tGreen"] = "Input {Value = 0, }"
+                fusion_effect_attribs["\t\t\tBlue"] = "Input {Value = 0, }"
             if value.startswith("{"): #individual channels selected
                 if "-rgba.red" in value:
-                    fusion_effect_attribs["Red"] = "Input {Value = 0, }"
+                    fusion_effect_attribs["\t\t\tRed"] = "Input {Value = 0, }"
                 if "-rgba.green" in value:
-                    fusion_effect_attribs["Green"] = "Input {Value = 0, }"
+                    fusion_effect_attribs["\t\t\tGreen"] = "Input {Value = 0, }"
                 if "-rgba.blue" in value:
-                    fusion_effect_attribs["Blue"] = "Input {Value = 0, }"
+                    fusion_effect_attribs["\t\t\tBlue"] = "Input {Value = 0, }"
                 if "-rgba.alpha" in value:
-                    fusion_effect_attribs["Alpha"] = "Input {Value = 0, }"
+                    fusion_effect_attribs["\t\t\tAlpha"] = "Input {Value = 0, }"
 
     return fusion_effect_attribs
 

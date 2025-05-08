@@ -12,6 +12,7 @@ from nusion.model.nodes.nuke_to_fusion import (
     Invert,
     Premult,
     Unpremult,
+    Read,
     Write,
     Dot,
 )
@@ -25,6 +26,7 @@ __all__ = (
     "Invert",
     "Premult",
     "Unpremult",
+    "Read",
     "Write",
     "Dot",
 )
@@ -41,5 +43,5 @@ def convert(node):
         # Use globals() to dynamically get the module by name
         converter = globals()[node.effect]
         return base_attribs, {**common_attribs, **converter.convert(node)}
-        
+
     raise ValueError(f"Node effect '{node.effect}' not currently supported.")

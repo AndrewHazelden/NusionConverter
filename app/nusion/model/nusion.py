@@ -18,5 +18,5 @@ class Project:
              if re.match(r"[A-Z]\w+\s\{", line):
                 nuke_node = Node.from_nuke(raw_lines[i:], self.resolution)
                 fusion_node = nuke_node.to_fusion()
-                result = f"{{\nTools = ordered() {{\n{fusion_node.output()}\n}}\n}}"
+                result = f"{{\n\tTools = ordered() {{\n\t\t{fusion_node.output()}\n\t}}\n}}"
                 return(result)

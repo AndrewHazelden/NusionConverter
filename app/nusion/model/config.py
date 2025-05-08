@@ -10,6 +10,7 @@ NUKE_TO_FUSION_NODE_NAMES = {
     "Transform": "Transform",
     "Unpremult": "AlphaDivide",
     "Write": "Saver",
+    "Read": "Loader",
     "Dot": "PipeRouter",
     }
 
@@ -43,14 +44,13 @@ NUKE_BASE_ATTRIBUTES = [
     "useLifetime",
     "lifetimeStart",
     "lifetimeEnd",
+    "file",
     ]
 
 NUKE_IGNORE_ATTRIBUTES = [
     "selected",
     "channel", #duplicate of "channels"
     ]
-
-
 
 ##############
 ### FUSION ###
@@ -65,3 +65,7 @@ FUSION_COLOR = [
     "TileColor",
     "TextColor",
     ]
+
+FUSION_CLIP = [
+    "Clip",
+]
