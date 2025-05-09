@@ -20,7 +20,7 @@ def convert(node):
         value = nuke_effect_attribs[knob]
 
         if value == "label":
-            fusion_effect_attribs["\t\t\Comments"] = "Input { Value = '{value}', }"
+            fusion_effect_attribs["\t\t\tComments"] = "Input { Value = '{value}', }"
 
     return fusion_effect_attribs
 

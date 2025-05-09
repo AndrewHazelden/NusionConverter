@@ -24,6 +24,7 @@ Lots of supported nodes are on the way!
 Nuke to Fusion
 
 - Blur
+- BackdropNode
 - Dot
 - Transform
 - Invert
