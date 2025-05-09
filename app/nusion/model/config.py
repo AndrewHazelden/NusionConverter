@@ -56,6 +56,7 @@ NUKE_TO_FUSION_NODE_NAMES = {
     "SphericalTransform": "PanoMap",
     "STMap": "Scale",
     "Text2": "TextPlus",
+    "Tracker4": "Tracker",
     "Transform": "Transform",
     "TransformGeo": "Transform3D",
     "Unpremult": "AlphaDivide",
