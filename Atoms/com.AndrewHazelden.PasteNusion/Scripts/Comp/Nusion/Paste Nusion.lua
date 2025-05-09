@@ -1,5 +1,5 @@
 --[[--
-Paste Nusion.lua - 2025-05-07 04.28 PM
+Paste Nusion.lua - 2025-05-09 10.50 AM
 Ported by Andrew Hazelden <andrew@andrewhazelden.com>
 
 The "Edit > Paste Nusion" menu item lets you paste a Foundry Nuke node from your clipboard and have it instantly translated into the corresponding Fusion Studio node.
@@ -103,12 +103,12 @@ function JSONToFile(node_str, width, height)
     bmd.createdir(dir)
     local path = dir .. 'Nodes.json'
     local pathNormalizeSlashes_str = string.gsub(path, "\\", "/")
-
     local noNewlines_str = string.gsub(node_str or "", "\n", "\\n")
     local NoCRs_str = string.gsub(noNewlines_str, "\r", "\\r")
+    local quote_str = string.gsub(NoCRs_str, [["]], [[\"]])
     -- print(NoCRs_str)
 
-    local outJson_str = [[{"data":"]] .. NoCRs_str .. [[" ,"width":"]] .. width .. [[","height":"]] .. height .. [[","fromSoftware":"nuke"}]]
+    local outJson_str = [[{"data":"]] .. quote_str .. [[" ,"width":"]] .. width .. [[","height":"]] .. height .. [[","fromSoftware":"nuke"}]]
 
     local fp = io.open(pathNormalizeSlashes_str, "w")
     if fp == nil then
@@ -145,7 +145,7 @@ function CopyFromClipboard()
         else
             out = fp:read("*all")
             fp:close()
-            os.remove(path)
+            -- os.remove(path)
         end
     end
 
@@ -155,6 +155,10 @@ end
 
 function Main()
     print("[Paste Nusion]")
+    -- Nusion Web app IP address
+    -- Default port is "5000"
+    -- The current system's localhost IP address is "http://127.0.0.1"
+    local nusionServerIP = "http://127.0.0.1:5000"
 
     -- Show debugging info in the Console window
     local show_dump = 1
@@ -163,11 +167,6 @@ function Main()
     local formatPrefs = comp:GetPrefs("Comp.FrameFormat")
     local width = tostring(formatPrefs.Width or 1920)
     local height = tostring(formatPrefs.Height or 1080)
-
-    -- Nusion Web app IP address
-    -- Default port is "5000"
-    -- The current system's localhost IP address is "http://127.0.0.1"
-    local nusionServerIP = "http://127.0.0.1:5000"
 
     -- Sample Nuke .nk Script Code Chunk
     local nukeScript_str = CopyFromClipboard()
