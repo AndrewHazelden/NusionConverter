@@ -2,7 +2,7 @@
 # Disable pylint invalid name warning as this files is named to match the Nuke node.
 
 def convert(node):
-    """ Convert Nuke Invert to Fusion Channel Boolean
+    """ Convert Constant to Fusion Background
 
     Returns:
         dict with fusion formatted effect attributes.
@@ -11,8 +11,7 @@ def convert(node):
     nuke_effect_attribs = node.effect_attribs
     fusion_effect_attribs = {}
 
-    # Create Channel Boolean set to Negative
-    fusion_effect_attribs["\t\t\tOperation"] = "Input {Value = 10, }" # 10: Negative
+    # color {R G B A}
 
     # Set default values
     fusion_effect_attribs["\t\t\tToRed"] = "Input {Value = 5, }" # 5: Red BG

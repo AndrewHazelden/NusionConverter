@@ -1,8 +1,5 @@
 # pylint: disable=invalid-name, missing-module-docstring
 # Disable pylint invalid name warning as this files is named to match the Nuke node.
-"""
-
-"""
 
 def convert(node):
     """ Convert Nuke Write to Fusion Saver
@@ -23,6 +20,7 @@ def convert(node):
 #             fusion_effect_attribs["\t\t\t['JpegFormat.Quality']"] = f"Input {{ Value = {value}, }}"
 #         if knob == "_jpeg_sub_sampling":
 #             fusion_effect_attribs["\t\t\t['JpegFormat.ChromaSubsampling']"] = f"Input {{ Value = 1, }}"
+
     return fusion_effect_attribs
 
 if __name__ == '__main__':
