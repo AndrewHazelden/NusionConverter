@@ -24,6 +24,8 @@ Nuke to Fusion
 - Blur
 - Dot
 - Invert
+- NoOp
+- Null
 - Premult
 - Read
 - StickyNote
@@ -35,6 +37,32 @@ Nuke to Fusion
 Fusion to Nuke
 
 - (Coming soon!)
+
+## Partial Support
+
+The following nodes have partial conversion support:
+
+### Add
+
+### Difference
+
+### Divide
+
+### Max
+
+### Min
+
+### Minus
+
+### Multiply
+
+### Cube
+
+### Cylinder
+
+### Sphere
+
+### Text2
 
 ## Example Nuke Node Snippet
 

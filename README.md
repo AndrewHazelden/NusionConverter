@@ -31,6 +31,8 @@ Nuke to Fusion
 - Blur
 - Dot
 - Invert
+- NoOp
+- Null
 - Premult
 - Read
 - StickyNote
