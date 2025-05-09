@@ -52,6 +52,7 @@ NUKE_TO_FUSION_NODE_NAMES = {
     "ScanlineRender": "Renderer3D",
     "Scene": "Merge3D",
     "Shuffle": "ChannelBoolean",
+    "Sphere": "Shape3D",
     "SphericalTransform": "PanoMap",
     "STMap": "Scale",
     "Text2": "TextPlus",
