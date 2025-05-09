@@ -11,41 +11,9 @@ def convert(node):
     nuke_effect_attribs = node.effect_attribs
     fusion_effect_attribs = {}
 
-    # color {R G B A}
-
-    # Set default values
-    fusion_effect_attribs["\t\t\tToRed"] = "Input {Value = 5, }" # 5: Red BG
-    fusion_effect_attribs["\t\t\tToGreen"] = "Input {Value = 6, }" # 6: Green BG
-    fusion_effect_attribs["\t\t\tToBlue"] = "Input {Value = 7, }" # 7: Blue BG
-    fusion_effect_attribs["\t\t\tToAlpha"] = "Input {Value = 8, }" # 8: Alpha BG
-
-    for knob in nuke_effect_attribs:
-        value = nuke_effect_attribs[knob]
-
-        if knob == "channels":
-            # This is a duplicate of the conversion found in CommonAttributes.
-            # The fusion ChannelBoolean node will have the channels disabled in two places.
-            # This may cause confusion for the user.
-            # TODO: Raise minor warning about this.
-            if value == "all":
-                #TODO: Add support for fusion auxiliary channels.
-                #TODO: Flag to user if there are any extra channels in the pipe.
-                pass
-            if value == "rgb":
-                fusion_effect_attribs["\t\t\tToAlpha"] = "Input {Value = 4, }" # 4: Do Nothing
-            if value == "alpha":
-                fusion_effect_attribs["\t\t\tToRed"] = "Input {Value = 4, }" # 4: Do Nothing
-                fusion_effect_attribs["\t\t\tToGreen"] = "Input {Value = 4, }" # 4: Do Nothing
-                fusion_effect_attribs["\t\t\tToBlue"] = "Input {Value = 4, }" # 4: Do Nothing
-            if value.startswith("{"): #individual channels selected
-                if "-rgba.red" in value:
-                    fusion_effect_attribs["\t\t\tToRed"] = "Input {Value = 4, }" # 4: Do Nothing
-                if "-rgba.green" in value:
-                    fusion_effect_attribs["\t\t\tToGreen"] = "Input {Value = 4, }" # 4: Do Nothing
-                if "-rgba.blue" in value:
-                    fusion_effect_attribs["\t\t\tToBlue"] = "Input {Value = 4, }" # 4: Do Nothing
-                if "-rgba.alpha" in value or "rgba.alpha" not in value:
-                    fusion_effect_attribs["\t\t\tToAlpha"] = "Input {Value = 4, }" # 4: Do Nothing
+    fusion_effect_attribs["\t\t\tUseFrameFormatSettings"] = f"Input {{Value = 1, }}"
+    fusion_effect_attribs["\t\t\tWidth"] = f"Input {{Value = {node.root_width}, }}"
+    fusion_effect_attribs["\t\t\tHeight"] = f"Input {{Value = {node.root_height}, }}"
 
     return fusion_effect_attribs
 
