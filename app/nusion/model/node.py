@@ -127,7 +127,10 @@ class FusionNode(Node):
         if output_effect_attribs:
             output_effect_attribs = f"\t\t\tInputs = {{\n{output_effect_attribs}\n\t\t\t}},"
         if output_viewinfo_attribs:
-            output_viewinfo_attribs = f"\t\t\tViewInfo = OperatorInfo {{\n{output_viewinfo_attribs}\n\t\t\t}},"
+            if self.effect == "Underlay":
+                output_viewinfo_attribs = f"\t\t\tViewInfo = UnderlayInfo {{\n{output_viewinfo_attribs}\n\t\t\t}},"
+            else:
+                output_viewinfo_attribs = f"\t\t\tViewInfo = OperatorInfo {{\n{output_viewinfo_attribs}\n\t\t\t}},"
         if output_clip_attribs:
             output_clip_attribs = f"\t\tClips = {{\n{output_clip_attribs}\n\t\t}},"
         if output_color_attribs:

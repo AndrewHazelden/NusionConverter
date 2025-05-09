@@ -19,6 +19,10 @@ def convert(node):
             fusion_base_attribs["Pos"] = \
                 f"\t\t\t\tPos = {{ {node.base_attribs['xpos']}, {node.base_attribs['ypos']} }}"
 
+        if knob == "bdwidth" or knob == "bdheight":
+            fusion_base_attribs["Size"] = \
+                f"\t\t\t\tSize = {{ {node.base_attribs['bdwidth']}, {node.base_attribs['bdheight']} }}"
+
         if knob == "disable":
             fusion_base_attribs['PassThrough'] = f"\t\tPassThrough = {value}"
 

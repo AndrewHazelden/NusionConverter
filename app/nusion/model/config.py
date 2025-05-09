@@ -7,7 +7,7 @@ NUKE_TO_FUSION_NODE_NAMES = {
     "AdjustBBox": "SetDomain",
     "Axis": "Locator3D",
     "Axis2": "Locator3D",
-    "BackDropNode": "Underlay",
+    "BackdropNode": "Underlay",
     "Blur": "Blur",
     "Card": "ImagePlane3D",
     "Card3D": "DVE",
@@ -74,6 +74,8 @@ NUKE_BASE_ATTRIBUTES = [
     "disable",
     "xpos",
     "ypos",
+    "bdwidth",
+    "bdheight",
     "note_font_color",
     "note_font",
     "note_font_size",
@@ -107,6 +109,7 @@ NUKE_IGNORE_ATTRIBUTES = [
 FUSION_VIEWINFO = [
     "Pos",
     "ShowPic",
+    "Size",
     ]
 
 FUSION_COLOR = [
