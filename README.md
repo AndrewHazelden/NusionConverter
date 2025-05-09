@@ -7,7 +7,7 @@
                                                                                                 
 ```
 
-Nusion is a Web app to convert nodes between Foundry's Nuke and Blackmagic Design's Fusion Studio compositing software. There is a Fusion Studio integration plugin that adds an "Edit &gt; Paste Nusion" menu item.
+Nusion is a Web app to convert nodes between Foundry's Nuke and Blackmagic Design's Fusion Studio compositing software. There is a new Fusion Studio integration plugin that adds an "Edit &gt; Paste Nusion" menu item.
 
 ## Screenshot
 
