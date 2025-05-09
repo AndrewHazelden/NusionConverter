@@ -28,6 +28,7 @@ Nuke to Fusion
 - Null
 - Premult
 - Read
+- Saturation
 - StickyNote
 - Transform
 - Unpremult

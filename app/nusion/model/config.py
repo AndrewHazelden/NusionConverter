@@ -49,6 +49,7 @@ NUKE_TO_FUSION_NODE_NAMES = {
     "Reconcile3D": "Camera3D",
     "Reformat": "BetterResize",
     "Retime": "Dimension.OpticalFlow",
+    "Saturation": "ColorCorrector",
     "ScanlineRender": "Renderer3D",
     "Scene": "Merge3D",
     "Shuffle": "ChannelBoolean",
