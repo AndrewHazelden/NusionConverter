@@ -8,11 +8,11 @@ Nusion is available as a self-hosted web app that runs directly in your web brow
 
 Nusion can run from your web browser using a local Nusion Server session hosted on your workstation.
 
-![Webapp](docs/images/screenshot.png ':size=650')
+![Webapp](images/screenshot.png ':size=650')
 
 If you have Blackmagic Fusion Studio, the "Paste Nusion" menu entry and Lua comp script allows you to convert a Foundry Nuke .nk node snippet into a BMD Fusion Studio native node. The "Shift + N" hotkey can also be used to carry out the conversion task.
 
-![Paste Nusion](docs/images/paste_nusion.png ':size=650')
+![Paste Nusion](images/paste_nusion.png ':size=650')
 
 ## Supported Nodes
 
