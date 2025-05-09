@@ -12,7 +12,7 @@ For example, if the Nuke node name is "Write", then the Python script would be c
 
 ![New Nodes](images/new_nodes_py_script.png)
 
-To make this task easier, there are existing node definition scripts in the "nuke_to_fusion" folder that you can copy and adapt.
+To make this task easier, there are existing node definition scripts in the "nuke\_to\_fusion" folder that you can copy and adapt.
 
 ![New Nodes](images/new_nodes_nuke_to_fusion_dir.png)
 
@@ -31,15 +31,13 @@ Also add the Nuke node name to the end of the items on this line:
 __all__ = (
 ```
 
-
 ![New Nodes](images/new_nodes_init.png)
-
 
 3. Update the config.py file to define how the node names are mapped during the conversion process:
 
         app/nusion/model/config.py
 
-Edit the "NUKE_TO_FUSION_NODE_NAMES = {" section to add the mapping from the original Nuke node name to the appropriate Fusion node name:
+Edit the "NUKE\_TO\_FUSION\_NODE\_NAMES = {" section to add the mapping from the original Nuke node name to the appropriate Fusion node name:
 
 ```py
 "Write": "Saver",
@@ -53,7 +51,7 @@ Finally, you can edit the Nusion Web app's HTML code to indicate the node is now
 
         app/templates/form.html
 
-Look for the HTML code that starts on the line and then add your node to the list:
+Look for the HTML code that starts on the following line, then add your node to the list:
 
 ```html
 <h2 class="uk-modal-title">Supported Nodes</h2>
