@@ -2,7 +2,7 @@
 # Disable pylint invalid name warning as this files is named to match the Nuke node.
 
 def convert(node):
-    """ Convert Nuke BackDropNode to Fusion Underlay
+    """ Convert Nuke StickyNote to Fusion Note
 
     Returns:
         dict with fusion formatted effect attributes.
@@ -21,7 +21,7 @@ def convert(node):
 
 #         # Shadowed by the CommonAttributes
 #         if value == "label":
-#             fusion_effect_attribs["\t\t\tComments"] = "Input { Value = '{value}', }"
+#             fusion_effect_attribs["\t\t\tComments"] = "Input { Value = '\"{value}\"', }"
 
     return fusion_effect_attribs
 

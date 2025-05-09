@@ -1,5 +1,5 @@
 --[[--
-Paste Nusion.lua - 2025-05-09 11.55 AM
+Paste Nusion.lua - 2025-05-09 02.55 PM
 Ported by Andrew Hazelden <andrew@andrewhazelden.com>
 
 The "Edit > Paste Nusion" menu item lets you paste a Foundry Nuke node from your clipboard and have it instantly translated into the corresponding Fusion Studio node.
@@ -99,16 +99,24 @@ function curlOutputFilename()
 end
 
 function JSONToFile(node_str, width, height)
+    local json = require("dkjson")
+
     local dir = comp:MapPath('Temp:/Nusion/')
     bmd.createdir(dir)
     local path = dir .. 'Nodes.json'
     local pathNormalizeSlashes_str = string.gsub(path, "\\", "/")
-    local noNewlines_str = string.gsub(node_str or "", "\n", "\\n")
-    local NoCRs_str = string.gsub(noNewlines_str, "\r", "\\r")
-    local quote_str = string.gsub(NoCRs_str, [["]], [[\"]])
-    -- print(NoCRs_str)
 
-    local outJson_str = [[{"data":"]] .. quote_str .. [[" ,"width":"]] .. width .. [[","height":"]] .. height .. [[","fromSoftware":"nuke"}]]
+    -- Create a Lua table
+    local tbl = {}
+    tbl.data = node_str
+    tbl.width = width
+    tbl.height = height
+    tbl.fromSoftware = "nuke"
+
+--    print("[JSON Encoded Table]")
+--    dump(tbl)
+
+    outJson_str = json.encode(tbl, {indent = 1})
 
     local fp = io.open(pathNormalizeSlashes_str, "w")
     if fp == nil then
@@ -118,8 +126,8 @@ function JSONToFile(node_str, width, height)
         fp:write("\n")
         fp:close()
     end
-    
-    return pathNormalizeSlashes_str
+
+    return pathNormalizeSlashes_str, outJson_str
 end
 
 function CopyFromClipboard()
@@ -183,7 +191,7 @@ function Main()
 --]=]
 
     -- Write the JSON file to disk
-    local jsonFile = JSONToFile(nukeScript_str, width, height)
+    local jsonFile, jsonStr = JSONToFile(nukeScript_str, width, height)
 
     local platform = GetPlatform()
     local curlFile = ""
@@ -210,6 +218,9 @@ function Main()
         print("\n[Nuke Script]")
         print(nukeScript_str)
   
+        print("\n[JSON Output]")
+        print(jsonStr)
+
         print("\n[CLI Parameters]")
         print(launchCommand)
 

@@ -19,6 +19,11 @@ def convert(node):
             fusion_base_attribs["Pos"] = \
                 f"\t\t\t\tPos = {{ {node.base_attribs['xpos']}, {node.base_attribs['ypos']} }}"
 
+        if node.effect == "StickyNote":
+            # Apply a default sizing for StickyNote/Note nodes
+            fusion_base_attribs["Size"] = \
+                f"\t\t\t\tSize = {{ {196}, {181.364} }}"
+
         if knob == "bdwidth" or knob == "bdheight":
             fusion_base_attribs["Size"] = \
                 f"\t\t\t\tSize = {{ {node.base_attribs['bdwidth']}, {node.base_attribs['bdheight']} }}"

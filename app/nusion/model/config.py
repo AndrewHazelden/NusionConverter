@@ -54,6 +54,7 @@ NUKE_TO_FUSION_NODE_NAMES = {
     "Shuffle": "ChannelBoolean",
     "Sphere": "Shape3D",
     "SphericalTransform": "PanoMap",
+    "StickyNote": "Note",
     "STMap": "Scale",
     "Text2": "TextPlus",
     "Tracker4": "Tracker",

@@ -129,6 +129,8 @@ class FusionNode(Node):
         if output_viewinfo_attribs:
             if self.effect == "Underlay":
                 output_viewinfo_attribs = f"\t\t\tViewInfo = UnderlayInfo {{\n{output_viewinfo_attribs}\n\t\t\t}},"
+            elif self.effect == "Note":
+                output_viewinfo_attribs = f"\t\t\tViewInfo = StickyNoteInfo {{\n{output_viewinfo_attribs}\n\t\t\t}},"
             else:
                 output_viewinfo_attribs = f"\t\t\tViewInfo = OperatorInfo {{\n{output_viewinfo_attribs}\n\t\t\t}},"
         if output_clip_attribs:

@@ -38,7 +38,9 @@ def convert(node):
                     fusion_effect_attribs["\t\t\tProcessAlpha"] = "Input {Value = 0, }"
 
         if knob == "label":
-            fusion_effect_attribs["\t\t\tComments"] = f"Input {{ Value = {value}, }}"
+            if value.startswith('"') and value.endswith('"'):
+                value = value[1:-1]
+            fusion_effect_attribs["\t\t\tComments"] = f"Input {{ Value = '{value}', }}"
 
     return fusion_effect_attribs
 
