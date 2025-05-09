@@ -1,4 +1,10 @@
 {
+	Hotkeys
+	{
+		Target = "FlowView",
+		
+		SHIFT_N = "RunScript{Name = 'Paste Nusion', filename = 'Scripts:/Comp/Nusion/Paste Nusion.lua'}",
+	},
 	Menus
 	{
 		Target = "ChildFrame",
