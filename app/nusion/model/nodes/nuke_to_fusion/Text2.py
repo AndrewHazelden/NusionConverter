@@ -10,6 +10,7 @@ def convert(node):
 
     nuke_effect_attribs = node.effect_attribs
     fusion_effect_attribs = {}
+
     for knob in nuke_effect_attribs:
         value = nuke_effect_attribs[knob]
 

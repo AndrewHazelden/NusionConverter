@@ -11,6 +11,11 @@ def convert(node):
     nuke_effect_attribs = node.effect_attribs
     fusion_effect_attribs = {}
 
+    fusion_effect_attribs["\t\t\t['Shape']"] = f"Input {{ Value = FuID {{ 'SurfaceCylinderInputs' }}, }}"
+
+    for knob in nuke_effect_attribs:
+        value = nuke_effect_attribs[knob]
+
     # No attributes on this node other than channels which is converted in CommonAttributes.
 
     return fusion_effect_attribs
