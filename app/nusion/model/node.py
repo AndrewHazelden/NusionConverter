@@ -106,6 +106,7 @@ class FusionNode(Node):
         output_viewinfo_attribs = ""
         output_clip_attribs = ""
         output_color_attribs = ""
+        output_nameset_attribs = ""
         for i, effect in enumerate(self.effect_attribs):
             output_effect_attribs += f"\t{effect} = {self.effect_attribs[effect]},"
             if i != len(self.effect_attribs)-1:
@@ -137,8 +138,10 @@ class FusionNode(Node):
             output_clip_attribs = f"\t\tClips = {{\n{output_clip_attribs}\n\t\t}},"
         if output_color_attribs:
             output_color_attribs = f"\t\tColors = {{\n{output_color_attribs}\n\t\t}},"
-
+        if self.effect == "Loader" or self.effect == "Saver":
+            output_nameset_attribs = f"\t\t\tNameSet = true,\n"
         node_output = f"{self.name} = {self.effect} {{\n" \
+                        f"{output_nameset_attribs}\n" \
                         f"{output_base_attribs}\n" \
                         f"{output_effect_attribs}\n" \
                         f"{output_viewinfo_attribs}\n" \
