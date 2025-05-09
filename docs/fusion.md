@@ -12,7 +12,13 @@ There is a beta version of a "Paste Nusion" Reactor atom package available from 
 2. Copy your Nuke node snippet into your clipboard buffer.
 3. Open Fusion Studio. Run the "Edit > Paste Nusion" menu item to automatically convert the nodes, and add them to your currently open Fusion comp.
 
-### Paste Nusion Installation:
+### Now Available in Reactor
+
+The "Paste Nusion" integration for Fusion can be installed using Reactor. Look for it in the Reactor "Scripts/Comp" category with a package name of "Paste Nusion". 
+
+Note: You will still need to add the Nusion web app to your system which is Python based.
+
+### Paste Nusion Manual Installation:
 
 The "Paste Nusion" script is accesible in the NusionConverter GitHub repo under the folder:
 
