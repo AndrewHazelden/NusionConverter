@@ -23,14 +23,15 @@ Lots of supported nodes are on the way!
 
 Nuke to Fusion
 
-- Blur
 - BackdropNode
+- Blur
 - Dot
-- Transform
 - Invert
 - Premult
-- Unpremult
 - Read
+- StickyNote
+- Transform
+- Unpremult
 - Write
 - ColorCorrect (Coming soon!)
 
