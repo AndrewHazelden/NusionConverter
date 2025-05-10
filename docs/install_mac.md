@@ -62,3 +62,28 @@ Open a webbrowser session to view the web app:
 open http://127.0.0.1:5000/
 ```
 ![Nusion CLI](images/10_webbrowser.png)
+
+## Create a NusionServer Standalone App Package
+
+Now that we have a working flask development setup, we can package the Nusion Web app resources into a self-contained standalone application. 
+
+This will produce an executable program named "NusionServer.app" that can be launched from the desktop by double-clicking on it.
+
+This technique is made possible through the use of Python tool called [pyinstaller](https://pyinstaller.org/en/stable/spec-files.html#spec-file-options-for-a-macos-bundle).
+
+Let's add pyinstaller to the existing nusion virtual environment:
+
+```bash
+source $HOME/nusion/bin/activate
+pip3 install pyinstaller
+```
+
+Let's package the flask based"app/app.py" file using pyinstaller:
+
+```bash
+source $HOME/nusion/bin/activate
+cd $HOME/NusionConverter/
+pyinstaller NusionServer.spec
+```
+
+Note: A PyInstaller NusionServer.spec file is being prepared at this time. It will be available shortly.
