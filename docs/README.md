@@ -22,6 +22,7 @@ Nuke to Fusion
 
 - BackdropNode
 - Blur
+- Constant
 - Dot
 - Invert
 - NoOp
